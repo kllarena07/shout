@@ -10,13 +10,11 @@ TWILIO_AUTH_TOKEN = getenv("TWILIO_AUTH_TOKEN")
 
 client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 
-message = "Hey beautiful 😏"
-message_reciever = "+12486353063"
+def send_message(reciever, message):
+    message = client.messages.create(
+            from_=TWILIO_PHONE_NUMBER,
+            body=message,
+            to=reciever
+    )
 
-message = client.messages.create(
-  from_=TWILIO_PHONE_NUMBER,
-  body=message,
-  to=message_reciever
-)
-
-print(message.sid)
+    print(f'{message.sid}: Attempting to send message to {reciever}')
